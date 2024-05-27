@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* 初始隐藏广告容器 */
+        #advertise3 {
+            display: none;
+            position: fixed;
+            bottom: 0; /* 将广告容器定位在底部 */
+            right: -100%; /* 初始时在页面外部 */
+            background-color: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: all 0.5s ease; /* 添加过渡效果 */
+            opacity: 0; /* 初始透明度为0 */
+        }
+
+        /* 广告显示时的样式 */
+        #advertise3.show {
+            right: 20px; /* 将广告移动到可见位置 */
+            opacity: 1; /* 透明度设为1 */
+        }
+    </style>
+</head>
+<body>
+
+<div id="advertise3">这是一个广告</div>
+
+<script>
+    setTimeout(function() {
+        var ad3 = document.getElementById('advertise3');
+        ad3.style.display = 'block'; // 显示广告容器
+
+        // 添加 'show' 类以触发过渡动画
+        ad3.classList.add('show');
+    }, 2000); // 2秒后显示广告
+</script>
+
+</body>
+</html>

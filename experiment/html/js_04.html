@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Centered Box with Advertisements</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body, html {
+            height: 100%;
+        }
+        .container {
+            display: flex;
+    
+            height: 300%;
+        }
+        .content-container {
+			width: 500px; /* 内容容器的宽度 */
+			height: 100%; /* 内容容器的高度 */
+			background-color: lightgray; /* 内容容器的背景色 */
+			text-align: center;
+			line-height: 200px;
+			margin: 0 auto; /* 水平居中 */
+        }
+        .advertise1, .advertise2,.advertise3 {
+			width: 150px; /* 广告容器的宽度 */
+			height: 300px; /* 广告容器的高度 */
+			background-color: lightblue; /*  广告容器的背景色 */
+			text-align: center;
+			line-height: 200px;
+			position: fixed; /* 将位置固定 */
+			
+        }
+		.advertise1{
+			left: 0;
+		}
+		.advertise2{
+			right: 0;
+		}
+		.advertise3{
+			display: none;
+			right: 0px;
+			bottom: 0px;
+		}
+		.button1{
+			position: absolute;
+			top: 0px;
+			left: 120px;
+		}
+		.button2{
+			position: absolute;
+			top: 0px;
+			right: 120px;
+		}
+		.button3{
+			position: absolute;
+			bottom: 0px;
+			right: 120px;
+		}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="advertise1" id="advertise1">
+            <!-- 在这里放置广告1内容 -->
+
+			<img  style="height: 100%;width: 100%;"src="../img/couplets1.png"/>
+			<button class="button1" onclick="closeAD('advertise1')">关闭</button>
+        </div>
+        
+        <div class="content-container">
+            <!-- 在这里放置主要内容 -->
+            <h1>219971123罗举</h1>
+        </div>
+        
+        <div class="advertise2" id="advertise2">
+            <!-- 在这里放置广告2内容 -->
+          <img  style="height: 100%;width: 100%;"src="../img/couplets2.png"/>
+		  		<button class="button2" onclick="closeAD('advertise2')">关闭</button>
+        </div>
+		<div class="advertise3" id="advertise3"> 
+			<img  style="height: 100%;width: 100%;"src="../img/couplets1.png"/>
+			<button class="button3" onclick="closeAD('advertise3')">关闭</button>
+		</div>
+    </div>
+	<script>
+		function closeAD(id){
+			var ADid = document.getElementById(id);
+			ADid.style.display='none';
+		}
+setTimeout(function() {
+    var ad3 = document.getElementById('advertise3');
+    ad3.style.display = 'block'; 
+    ad3.style.opacity = 0; // 设置透明度
+
+    var opacity = 0;
+    var intervalId = setInterval(function() {
+        if (opacity < 1) {
+            opacity += 0.1; // 透明度每次增加0.1
+            ad3.style.opacity = opacity;
+        } else {
+            clearInterval(intervalId); // 达到透明度为1时清除定时器
+        }
+    }, 100); // 每100毫秒执行一次，实现渐变效果
+}, 2000); // 2秒后显示广告
+
+	</script>
+</body>
+</html>
