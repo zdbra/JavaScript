@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>让坦克开起来</title>
+    <style type="text/css">
+        input { font-size: 26px; margin-top: 20px; }
+        body { background-image: url(img/grassland.png); }
+        #mytank { position: absolute; left: 10px; top: 100px; transition: transform 0.5s ease; }
+		
+    </style>
+    <script>
+		//219971123罗举
+        window.addEventListener("load", function() {
+            // 获取坦克元素
+            var tank = document.getElementById("mytank");
+
+            // 定义坦克的初始位置
+            var tankPosition = {
+                x: 10,
+                y: 100
+            };
+
+            // 监听键盘按下事件
+            window.addEventListener("keydown", function(event) {
+                var keyCode = event.keyCode;
+				// 获取页面的宽度和高度
+				var pageWidth = window.innerWidth;
+				var pageHeight = window.innerHeight;
+				var tankWidth = tank.clientWidth;
+				var tankHeight = tank.clientHeight;
+				
+                // 根据按键编码移动坦克
+                switch(keyCode) {
+                    case 37: // 左箭头
+                        tankPosition.x -= 10;
+						if (tankPosition.x < 0) {
+						    tankPosition.x = 0;
+						}
+							tank.style.left = tankPosition.x + "px";
+                        tank.style.transform = 'rotate(180deg)';// 向左转180度
+                        break;
+                    case 38: // 上箭头
+                        tankPosition.y -= 10;
+						if (tankPosition.y < 0) {
+						    tankPosition.y = 0;
+						}
+                        tank.style.top = tankPosition.y + "px";
+						tank.style.transform = 'rotate(-90deg)'; // 向上转90度
+                        break;
+                    case 39: // 右箭头
+                       tankPosition.x += 10;
+                    if (tankPosition.x > pageWidth - tankWidth) {
+							tankPosition.x = pageWidth - tankWidth;
+                        }
+                        tank.style.left = tankPosition.x + "px";
+                        tank.style.transform = 'rotate(0deg)'; // 向右转0度
+                        break;
+                    case 40: // 下箭头
+                       tankPosition.y += 10;
+                        if (tankPosition.y > pageHeight - tankHeight) {
+							tankPosition.y = pageHeight - tankHeight;
+                        }//根据页面大小来判断坦克是否超出范围
+                        tank.style.top = tankPosition.y + "px";
+                        tank.style.transform = 'rotate(90deg)'; // 向下转90度
+                        break;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+ <!-- 初始方向为右 -->
+    <img id="mytank" src="img/right.png" style="transform: rotate(0deg);"/>
+
+</body>
+</html>

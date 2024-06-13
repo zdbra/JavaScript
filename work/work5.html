@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>使用jQuery移动图片</title>
+	<!-- 219971123罗举 -->
+    <style>
+        body {
+            background-color: black; /* 将背景颜色设置为黑色 */
+            margin: 0; 
+            padding: 0; 
+        }
+
+        .role {
+            position: relative; 
+            width: 100vw; 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+
+        .role img {
+            position: absolute; 
+        }
+    </style>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="role">
+    <img src="img/player2.gif" id="player" />
+</div>
+<script>
+    $(document).ready(function(){
+        //点击页面某个位置后，图片缓慢移动到点击位置
+        $("body").click(function(event){
+            var clickX = event.pageX; //获取点击位置的X坐标
+            var clickY = event.pageY; //获取点击位置的Y坐标
+            var player = $("#player");
+            var currentX = player.offset().left; //获取图片当前的X坐标
+            var currentY = player.offset().top; //获取图片当前的Y坐标
+
+            //计算图片需要移动的距离
+            var deltaX = clickX - currentX;
+            var deltaY = clickY - currentY;
+
+            //使用动画让图片移动到点击位置
+            player.stop().animate({
+                left: '+=' + deltaX,
+                top: '+=' + deltaY
+            }, 1000); // 动画持续时间为1秒
+        });
+
+        //双击图片时更换图片
+        $("#player").dblclick(function(){
+            var currentSrc = $(this).attr("src");
+            if(currentSrc === "img/player2.gif") {
+                $(this).attr("src", "img/playerbig_left.gif");
+            } else {
+                $(this).attr("src", "img/player2.gif");
+            }
+        });
+    });
+</script>
+</body>
+</html>
